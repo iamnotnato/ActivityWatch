@@ -1,0 +1,23 @@
+NOTICE
+======
+
+This repository is a modified version (fork) of ActivityWatch
+(https://github.com/ActivityWatch/activitywatch).
+
+Modifications by: Alan Nato, 2026
+
+Purpose of modifications: Adapt the application to accurately record the
+total time spent on game development. Existing tools such as WakaTime only
+capture a very small time range (editor-focused heartbeats with short idle
+windows), which under-reports real development time spent across game
+engines, art tools, browsers, and other applications.
+
+License
+-------
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this file,
+You can obtain one at https://mozilla.org/MPL/2.0/.
+
+All modifications in this fork are licensed under the same license as the
+files they modify (MPL-2.0, see LICENSE.txt). Original copyright is
+retained by the ActivityWatch contributors.

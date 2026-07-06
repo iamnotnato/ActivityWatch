@@ -71,6 +71,11 @@
 -->
 
 
+> [!NOTE]
+> **About this fork** (maintained by Alan Nato):
+> This is a modified version of [ActivityWatch](https://github.com/ActivityWatch/activitywatch), adapted to accurately record the total time spent making my game. Tools like WakaTime only capture a very small time range (short heartbeat/idle windows focused on editor activity), which under-reports real development time spent in engines, art tools, browsers, and other apps. This fork tweaks the app so the full game-development workflow is tracked properly.
+> All modifications remain licensed under the [MPL-2.0](LICENSE.txt), same as the upstream project.
+
 *Do you want to receive email updates on major announcements?*<br>
 ***[Signup for the newsletter](http://eepurl.com/cTU6QX)!***
 
@@ -273,4 +278,10 @@ Want to help? Great! Check out the [CONTRIBUTING.md file](./CONTRIBUTING.md)!
 ## Questions and support
 
 Have a question, suggestion, problem, or just want to say hi? Post on [the forum](https://forum.activitywatch.net/)!
+
+## License
+
+ActivityWatch is licensed under the [Mozilla Public License 2.0 (MPL-2.0)](LICENSE.txt).
+
+This fork contains modifications by Alan Nato (2026) to accurately record time spent on game development (see the fork notice above). In accordance with the MPL-2.0, all modifications to covered files remain under the same license, and the original copyright of the ActivityWatch contributors is retained.
 
