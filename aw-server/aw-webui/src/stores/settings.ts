@@ -108,7 +108,7 @@ export const useSettingsStore = defineStore('settings', {
     // Developer settings
     // NOTE: PRODUCTION might be undefined (in tests, for example)
     devmode: typeof PRODUCTION === 'undefined' ? true : !PRODUCTION,
-    showYearly: false,
+    showYearly: true,
     useMultidevice: false,
     requestTimeout: 30,
 
