@@ -63,7 +63,7 @@ endif
 # What it does:
 #  - Installs all the Python modules
 #  - Builds the web UI and bundles it with aw-server
-build: aw-core/.git
+build:
 #	needed due to https://github.com/pypa/setuptools/issues/1963
 #	would ordinarily be specified in pyproject.toml, but is not respected due to https://github.com/pypa/setuptools/issues/1963
 	pip install 'setuptools>49.1.1'
@@ -145,9 +145,6 @@ test-integration:
 	# aw-server-python
 	@echo "== Integration testing aw-server =="
 	@pytest ./scripts/tests/integration_tests.py ./aw-server/tests/ -v
-
-%/.git:
-	git submodule update --init --recursive
 
 ifeq ($(TAURI_BUILD),true)
 	ICON := "aw-tauri/src-tauri/icons/icon.png"
