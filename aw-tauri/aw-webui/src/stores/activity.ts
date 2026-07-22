@@ -200,17 +200,16 @@ export const useActivityStore = defineStore('activity', {
 
   getters: {
     getActiveHistoryAroundTimeperiod(this: State) {
-      return (timeperiod: TimePeriod): IEvent[][] => {
-        const periods = timeperiodStrsAroundTimeperiod(timeperiod);
-        const _history = periods.map(tp => {
-          if (_.has(this.active.history, tp)) {
-            return this.active.history[tp];
-          } else {
-            // A zero-duration placeholder until new data has been fetched
-            return [{ timestamp: moment(tp.split('/')[0]).format(), duration: 0, data: {} }];
-          }
+      return (timeperiod: TimePeriod): { timeperiod: TimePeriod; events: IEvent[] }[] => {
+        // Return the period alongside its events, so consumers (like the
+        // periodusage visualization) can label/navigate by the period start
+        // rather than guessing the date from event timestamps. Periods that
+        // haven't been fetched yet, or that had no activity, simply get an
+        // empty events array (rendered as a zero-height bar).
+        return timeperiodsAroundTimeperiod(timeperiod).map(tp => {
+          const tp_str = timeperiodToStr(tp);
+          return { timeperiod: tp, events: this.active.history[tp_str] || [] };
         });
-        return _history;
       };
     },
     uncategorizedDuration(this: State): [number, number] | null {

@@ -502,10 +502,10 @@ export default {
       }
 
       let new_date;
-      if (periodLength == '7 days') {
+      if (periodLength == '7 days' || periodLength == 'last7d') {
         periodLength = 'last7d';
         new_date = anchorDate.clone().add(1, 'days').format('YYYY-MM-DD');
-      } else if (periodLength == '30 days') {
+      } else if (periodLength == '30 days' || periodLength == 'last30d') {
         periodLength = 'last30d';
         new_date = anchorDate.clone().add(1, 'days').format('YYYY-MM-DD');
       } else {

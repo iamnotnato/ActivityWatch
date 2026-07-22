@@ -3,6 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 
 import { seconds_to_duration, get_hour_offset } from '../util/time.ts';
+import { dateformat as dateformat_for_period } from '../util/timeperiod.ts';
 
 function create(svg_elem: SVGElement) {
   // Clear element
@@ -45,7 +46,7 @@ function update(svg_elem: SVGElement, usage_arr, onPeriodClicked) {
     return day_event != undefined ? day_event.duration : 0;
   }
 
-  const usage_times = usage_arr.map(day_events => get_usage_time(day_events));
+  const usage_times = usage_arr.map(entry => get_usage_time(entry.events));
   let longest_usage = Math.max.apply(null, usage_times);
   // Avoid division by zero
   if (longest_usage <= 0) {
@@ -56,21 +57,33 @@ function update(svg_elem: SVGElement, usage_arr, onPeriodClicked) {
   const width = 100 / usage_arr.length - padding;
   const center_elem = Math.floor(usage_arr.length / 2);
 
-  _.each(usage_arr, (events, i: number) => {
-    const usage_time = get_usage_time(events);
+  _.each(usage_arr, (entry, i: number) => {
+    const usage_time = get_usage_time(entry.events);
     const height = 85 * (usage_time / longest_usage);
-    let date = '';
-    if (events.length > 0) {
-      // slice off so it's only the day
-      date = moment(events[0].timestamp).subtract(get_hour_offset(), 'hours').format(dateformat);
-    }
+    // Derive the date from the period itself, not from the events. Events
+    // may be missing (period not fetched, or no activity), and for
+    // week/month/year periods the merged event timestamp can be any time
+    // within the period — both of which previously produced empty/wrong
+    // dates, breaking navigation and labelling for non-day periods.
+    const date = moment(entry.timeperiod.start)
+      .subtract(get_hour_offset(), 'hours')
+      .format(dateformat);
+    // Human-friendly label for the tooltip (e.g. "2026" for years,
+    // "2026-07" for months), while `date` stays YYYY-MM-DD for navigation.
+    const label = moment(entry.timeperiod.start)
+      .subtract(get_hour_offset(), 'hours')
+      .format(dateformat_for_period(entry.timeperiod.length[1]));
     const color = i === center_elem ? diagramcolor_selected : diagramcolor;
     const offset = 50;
 
     const x = i * padding + i * width + 0.25 * width;
 
-    // FIXME: Doesn't work well, notably breaks on last7d and last30d
-    if (moment(date).isSame(moment(), 'day')) {
+    // Use center_elem to mark the current period for all period lengths
+    // (day/week/month/year/last7d/last30d). The center is always the
+    // period that contains "now", so this works correctly regardless of
+    // the step size — unlike the previous isSame('day') check which only
+    // worked when the bar's event timestamp happened to fall on today.
+    if (i === center_elem) {
       svg
         .append('line')
         .attr('x1', x + width / 2 + '%')
@@ -111,7 +124,7 @@ function update(svg_elem: SVGElement, usage_arr, onPeriodClicked) {
       .on('click', function () {
         onPeriodClicked(date);
       });
-    rect.append('title').text(date + '\n' + seconds_to_duration(usage_time));
+    rect.append('title').text(label + '\n' + seconds_to_duration(usage_time));
   });
 }
 
