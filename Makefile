@@ -98,10 +98,9 @@ endif
 # Update
 # ------
 #
-# Pulls the latest version, updates all the submodules, then runs `make build`.
+# Pulls the latest version, then runs `make build`.
 update:
 	git pull
-	git submodule update --init --recursive
 	make build
 
 

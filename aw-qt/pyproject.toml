@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aw-qt"
-version = "0.1.0"
+version = "1.0.0"
 description = "Trayicon for ActivityWatch"
 authors = ["Erik Bjäreholt <erik@bjareho.lt>"]
 license = "MPL-2.0"
@@ -13,7 +13,7 @@ packages = [
 aw-qt = "aw_qt:main"
 
 [tool.poetry.dependencies]
-python = "^3.8,<3.14"  # PyInstaller needs <3.14
+python = "^3.9,<3.14"  # PyInstaller needs <3.14
 aw-core = "^0.5"
 
 pyobjc-framework-Cocoa = { version = "*", platform = "darwin" }

@@ -20,7 +20,7 @@ packages = [
 aw-cli = "aw_cli.__main__:main"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 jsonschema = "^4.3"
 peewee = ">=3.0.0,<5.0.0"
 platformdirs = "3.10"  # pinned due to sometimes breaking changes in minor versions: https://github.com/ActivityWatch/aw-core/pull/122#issuecomment-1768020335

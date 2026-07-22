@@ -11,14 +11,11 @@ build: prebuild
 dev: prebuild
 	npm run tauri dev
 
-%/.git:
-	git submodule update --init --recursive
-
-src-tauri/icons/icon.png: aw-webui/.git
+src-tauri/icons/icon.png:
 	mkdir -p src-tauri/icons
 	npm run tauri icon "./aw-webui/media/logo/logo.png"
 
-aw-webui/dist: aw-webui/.git
+aw-webui/dist:
 	cd aw-webui && make build
 
 prebuild: aw-webui/dist node_modules src-tauri/icons/icon.png

@@ -10,7 +10,7 @@ include = ["aw_server/static/*"]
 aw-server = "aw_server:main"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 aw-core = "^0.5.8"
 aw-client = "^0.5.8"
 flask = "^2.2"

@@ -259,9 +259,10 @@ def summary_repo(
         full_history_url = f"https://github.com/{org}/{repo}/compare/{commit_range[0]}...{commit_range[1]}"
         out += f"\n\n*(excluded {hidden} less relevant [commits]({full_history_url}))*"
 
-    # NOTE: For now, these TODOs can be manually fixed for each changelog.
-    # TODO: Fix issue where subsubmodules can appear twice (like aw-webui)
-    # TODO: Use specific order (aw-webui should be one of the first, for example)
+    # NOTE: Submodules have been flattened into regular directories in this repo,
+    # so all commits already appear in the main repo log above.
+    # `git submodule summary` returns empty output when no submodules exist,
+    # making the loop below a graceful no-op (kept for compatibility).
     summary_subrepos = run(
         f"git submodule summary --cached {commit_range[0]}", cwd=path
     )
