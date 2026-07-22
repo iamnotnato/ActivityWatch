@@ -24,7 +24,7 @@ from .exceptions import BadRequest, Unauthorized
 
 def sanitize_for_log(value) -> str:
     """Sanitize a user-provided value before logging, to prevent log injection."""
-    return str(value).replace("\r", "\\r").replace("\n", "\\n")
+    return str(value).replace("\r\n", "").replace("\r", "").replace("\n", "")
 
 
 def host_header_check(f):
