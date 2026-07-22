@@ -135,18 +135,15 @@ def test_list():
 
     # Comma without pre/post value
     with pytest.raises(QueryParseException):
-        l_str = "[,]"
-        ls = QList.parse(l_str, ns)
+        QList.parse("[,]", ns)
 
     # Comma without post value
     with pytest.raises(QueryParseException):
-        l_str = "[1,]"
-        ls = QList.parse(l_str, ns)
+        QList.parse("[1,]", ns)
 
     # Comma without pre value
     with pytest.raises(QueryParseException):
-        l_str = "[,2]"
-        ls = QList.parse(l_str, ns)
+        QList.parse("[,2]", ns)
 
 
 def test_query2_bogus_query():

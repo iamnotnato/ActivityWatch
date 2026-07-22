@@ -22,6 +22,11 @@ from .api import ServerAPI
 from .exceptions import BadRequest, Unauthorized
 
 
+def sanitize_for_log(value) -> str:
+    """Sanitize a user-provided value before logging, to prevent log injection."""
+    return str(value).replace("\r", "\\r").replace("\n", "\\n")
+
+
 def host_header_check(f):
     """
     Protects against DNS rebinding attacks (see https://github.com/ActivityWatch/activitywatch/security/advisories/GHSA-v9fg-6g9j-h4x4)
@@ -214,7 +219,7 @@ class EventsResource(Resource):
         data = request.get_json()
         logger.debug(
             "Received post request for event in bucket '{}' and data: {}".format(
-                bucket_id, data
+                sanitize_for_log(bucket_id), sanitize_for_log(data)
             )
         )
 
@@ -250,7 +255,7 @@ class EventResource(Resource):
     @copy_doc(ServerAPI.get_event)
     def get(self, bucket_id: str, event_id: int):
         logger.debug(
-            f"Received get request for event with id '{event_id}' in bucket '{bucket_id}'"
+            f"Received get request for event with id '{event_id}' in bucket '{sanitize_for_log(bucket_id)}'"
         )
         event = current_app.api.get_event(bucket_id, event_id)
         if event:
@@ -262,7 +267,7 @@ class EventResource(Resource):
     def delete(self, bucket_id: str, event_id: int):
         logger.debug(
             "Received delete request for event with id '{}' in bucket '{}'".format(
-                event_id, bucket_id
+                event_id, sanitize_for_log(bucket_id)
             )
         )
         success = current_app.api.delete_event(bucket_id, event_id)

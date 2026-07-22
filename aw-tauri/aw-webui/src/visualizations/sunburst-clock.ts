@@ -247,7 +247,7 @@ function update(
   vis.append('svg:circle').attr('r', radius).style('opacity', 0);
 
   // Turn the data into a d3 hierarchy and calculate the sums.
-  let root: d3.HierarchyNode<IEvent> = d3.hierarchy<IEvent>(root_event);
+  const root: d3.HierarchyNode<IEvent> = d3.hierarchy<IEvent>(root_event);
   const root_node: d3.HierarchyRectangularNode<IEvent> = partition_layout(root);
 
   const mode_clock = true;
@@ -307,7 +307,8 @@ function update(
       })
       .descendants();
   } else {
-    root = root
+    // .sum() and .sort() mutate the hierarchy in-place
+    root
       .sum(d => d.duration)
       .sort((a, b) => JSON.stringify(a.data.data).localeCompare(JSON.stringify(b.data.data)));
     nodes = root_node.descendants();

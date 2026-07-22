@@ -101,6 +101,9 @@ def _config_cors(cors_origins: List[str], testing: bool):
             "or CLI argument (could be a security risk): {}".format(cors_origins)
         )
 
+    # Copy to avoid mutating the caller's list (which may be a default argument)
+    cors_origins = list(cors_origins)
+
     if testing:
         # Used for development of aw-webui
         cors_origins.append("http://127.0.0.1:27180/*")

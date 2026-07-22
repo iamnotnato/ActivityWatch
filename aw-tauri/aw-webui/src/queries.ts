@@ -11,7 +11,7 @@ function querystr_to_array(querystr: string): string[] {
 }
 
 function escape_doublequote(s: string) {
-  return s.replace(/"/g, '\\"');
+  return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
 
 // Hostname safe for using as a variable name

@@ -443,7 +443,7 @@ See the [getting started guide in the documentation](https://docs.activitywatch.
 
 
 def _resolve_email(email: str) -> Optional[str]:
-    if "users.noreply.github.com" in email:
+    if email.endswith("@users.noreply.github.com"):
         username = email.split("@")[0]
         if "+" in username:
             username = username.split("+")[1]
