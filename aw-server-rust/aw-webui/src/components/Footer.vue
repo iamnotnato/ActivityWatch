@@ -1,10 +1,7 @@
 <template lang="pug">
 div.container(style="color: #555; font-size: 0.9em")
   div.mb-2
-    | Made with
-    a(href="https://activitywatch.net/donate/", target="_blank" rel="noopener noreferrer")
-      icon(name="heart" scale=0.75 style="fill: #E55")
-    | by the #[a(href="http://activitywatch.net/contributors/") ActivityWatch developers]
+    | Modified by Alan Nato
     div
       span.mt-2(v-if="info", style="color: #888; font-size: 0.8em")
         span.mr-2
