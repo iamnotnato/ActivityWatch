@@ -255,7 +255,7 @@ class EventResource(Resource):
     @copy_doc(ServerAPI.get_event)
     def get(self, bucket_id: str, event_id: int):
         logger.debug(
-            f"Received get request for event with id '{event_id}' in bucket '{sanitize_for_log(bucket_id)}'"
+            f"Received get request for event with id '{sanitize_for_log(event_id)}' in bucket '{sanitize_for_log(bucket_id)}'"
         )
         event = current_app.api.get_event(bucket_id, event_id)
         if event:
@@ -267,7 +267,7 @@ class EventResource(Resource):
     def delete(self, bucket_id: str, event_id: int):
         logger.debug(
             "Received delete request for event with id '{}' in bucket '{}'".format(
-                event_id, sanitize_for_log(bucket_id)
+                sanitize_for_log(event_id), sanitize_for_log(bucket_id)
             )
         )
         success = current_app.api.delete_event(bucket_id, event_id)
