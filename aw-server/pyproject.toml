@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aw-server"
-version = "1.0.0.dev0+214b228"
+version = "1.0.0.dev0+d4d3caf"
 description = "Server for ActivityWatch"
 authors = ["Erik Bjäreholt <erik@bjareho.lt>"]
 license = "MPL-2.0"

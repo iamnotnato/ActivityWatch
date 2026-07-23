@@ -1,0 +1,11 @@
+[advisories]
+ignore = [
+    # rand 0.8 unsoundness note — pulled in by rocket 0.5.x, which pins rand 0.8.
+    # Fixed only on rocket's unreleased master (0.6); no crates.io release available.
+    "RUSTSEC-2026-0097",
+    # glib VariantStrIter unsoundness — glib 0.18 is pinned by gtk3-rs 0.18 (final
+    # release of the gtk3 bindings), which tauri 2.x requires on Linux. Linux-only
+    # target dependency; not compiled into Windows/macOS builds. Fix requires
+    # Tauri's upstream GTK4 migration.
+    "RUSTSEC-2024-0429",
+]

@@ -1,0 +1,6 @@
+[advisories]
+ignore = [
+    # rand 0.8 unsoundness note — pulled in by rocket 0.5.x, which pins rand 0.8.
+    # Fixed only on rocket's unreleased master (0.6); no crates.io release available.
+    "RUSTSEC-2026-0097",
+]
