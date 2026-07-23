@@ -18,5 +18,9 @@
   "homepage": "https://github.com/ActivityWatch/aw-watcher-input#readme",
   "dependencies": {
     "aw-client": "^0.3.0"
+  },
+  "overrides": {
+    "axios": "^1.13.2",
+    "follow-redirects": "^1.15.6"
   }
 }
