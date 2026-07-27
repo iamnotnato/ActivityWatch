@@ -356,11 +356,13 @@ export const useCategoryStore = defineStore('categories', {
     },
     appendClassRule(this: State, classId: number, pattern: string) {
       const cat = this.classes.find((c: Category) => c.id === classId);
-      if (cat.rule.type === 'none' || cat.rule.type === null) {
-        cat.rule.type = 'regex';
-        cat.rule.regex = pattern;
-      } else if (cat.rule.type === 'regex') {
+      if (cat.rule.type === 'regex' && cat.rule.regex) {
         cat.rule.regex += '|' + pattern;
+      } else {
+        // Covers type 'none', null, undefined (e.g. legacy/corrupt `rule: {}`),
+        // and regex rules with an empty pattern. Previously an undefined type
+        // fell through both branches and the append was silently dropped.
+        cat.rule = { type: 'regex', regex: pattern };
       }
       this.classes_unsaved_changes = true;
     },
