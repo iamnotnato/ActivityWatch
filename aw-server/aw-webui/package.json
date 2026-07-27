@@ -8,6 +8,7 @@
   "type": "module",
   "scripts": {
     "serve": "vue-cli-service serve",
+    "prebuild": "node -e \"const fs=require('fs');fs.mkdirSync('static',{recursive:true});for(const f of ['logo.png','logo.svg'])fs.copyFileSync('media/logo/'+f,'static/'+f)\"",
     "build": "vue-cli-service build",
     "test": "jest",
     "test:unit": "jest --selectProjects jsdom",
